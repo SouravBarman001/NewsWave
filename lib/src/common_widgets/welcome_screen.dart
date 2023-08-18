@@ -64,17 +64,20 @@ class WelcomeScreen extends StatelessWidget {
                            Get.toNamed('/login');
                            print('login');
                          },
-                         child: Container(
-                           decoration: const BoxDecoration(
-                             color: Color(0xffF89AEE),
-                             borderRadius: BorderRadius.only(
-                                 topLeft: Radius.circular(15),
-                                 bottomLeft: Radius.circular(15)
-                             )
+                         child: Hero(
+                           tag: 'signin',
+                           child: Container(
+                             decoration: const BoxDecoration(
+                               color: Color(0xffF89AEE),
+                               borderRadius: BorderRadius.only(
+                                   topLeft: Radius.circular(15),
+                                   bottomLeft: Radius.circular(15)
+                               )
+                             ),
+                             alignment: Alignment.center,
+                             child: Text('Sign in',style: GoogleFonts.outfit(
+                                 fontSize: 19,fontWeight: FontWeight.bold,color: Colors.white),),
                            ),
-                           alignment: Alignment.center,
-                           child: Text('Sign in',style: GoogleFonts.outfit(
-                               fontSize: 19,fontWeight: FontWeight.bold,color: Colors.white),),
                          ),
                        ),
                      ),
@@ -90,7 +93,7 @@ class WelcomeScreen extends StatelessWidget {
                              )
                          ),
                          alignment: Alignment.center,
-                         child: Text('Sign in',style: GoogleFonts.outfit(
+                         child: Text('Sign Up',style: GoogleFonts.outfit(
                              fontSize: 19,fontWeight: FontWeight.bold,color: const Color(0xff545151)),),
                        ),
                      ),

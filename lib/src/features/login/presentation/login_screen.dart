@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../common_widgets/bottom_navigation.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -121,20 +123,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: const Color(0xffF89AEE),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Text(
-                      'Sign in',
-                      style: GoogleFonts.outfit(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 24,
-                          color: Colors.white),
+                  Hero(
+                    tag: 'signin',
+                    child: InkWell(
+                      onTap: (){
+                        Get.to(()=>BottomNavigation());
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 60,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffF89AEE),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Text(
+                          'Sign in',
+                          style: GoogleFonts.outfit(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 24,
+                              color: Colors.white),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
