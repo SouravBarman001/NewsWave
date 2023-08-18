@@ -15,6 +15,7 @@ class WelcomeScreen extends StatelessWidget {
    final orientation = MediaQuery.of(context).orientation;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child:Padding(
           padding: const EdgeInsets.all(8.0),
@@ -58,38 +59,39 @@ class WelcomeScreen extends StatelessWidget {
                    children: [
                      Expanded(
                        flex: 3,
-                       child: Container(
-                         decoration: const BoxDecoration(
-                           color: Color(0xffF89AEE),
-                           borderRadius: BorderRadius.only(
-                               topLeft: Radius.circular(15),
-                               bottomLeft: Radius.circular(15)
-                           )
+                       child: InkWell(
+                         onTap: (){
+                           Get.toNamed('/login');
+                           print('login');
+                         },
+                         child: Container(
+                           decoration: const BoxDecoration(
+                             color: Color(0xffF89AEE),
+                             borderRadius: BorderRadius.only(
+                                 topLeft: Radius.circular(15),
+                                 bottomLeft: Radius.circular(15)
+                             )
+                           ),
+                           alignment: Alignment.center,
+                           child: Text('Sign in',style: GoogleFonts.outfit(
+                               fontSize: 19,fontWeight: FontWeight.bold,color: Colors.white),),
                          ),
-                         alignment: Alignment.center,
-                         child: Text('Sign in',style: GoogleFonts.outfit(
-                             fontSize: 19,fontWeight: FontWeight.bold,color: Colors.white),),
                        ),
                      ),
                      Expanded(
                        flex: 2,
-                       child: InkWell(
-                         onTap: (){
-                           Get.toNamed('login');
-                         },
-                         child: Container(
-                           decoration: const BoxDecoration(
+                       child: Container(
+                         decoration: const BoxDecoration(
 
-                               color: Color(0xffF3F3F3),
-                               borderRadius: BorderRadius.only(
-                                   topRight: Radius.circular(15),
-                                   bottomRight: Radius.circular(15)
-                               )
-                           ),
-                           alignment: Alignment.center,
-                           child: Text('Sign in',style: GoogleFonts.outfit(
-                               fontSize: 19,fontWeight: FontWeight.bold,color: const Color(0xff545151)),),
+                             color: Color(0xffF3F3F3),
+                             borderRadius: BorderRadius.only(
+                                 topRight: Radius.circular(15),
+                                 bottomRight: Radius.circular(15)
+                             )
                          ),
+                         alignment: Alignment.center,
+                         child: Text('Sign in',style: GoogleFonts.outfit(
+                             fontSize: 19,fontWeight: FontWeight.bold,color: const Color(0xff545151)),),
                        ),
                      ),
 

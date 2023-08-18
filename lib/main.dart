@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return  GetMaterialApp(
-      initialRoute: Routes.page1,
+      home: const WelcomeScreen(),
       getPages:pages,
       debugShowCheckedModeBanner: false,
     );
