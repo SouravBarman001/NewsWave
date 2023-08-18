@@ -26,38 +26,38 @@ class BottomNavigation extends ConsumerWidget {
     final currentScreenIndex = ref.watch(screenIndexProvider);
 
     return Scaffold(
+      extendBody: true,
       bottomNavigationBar: DotNavigationBar(
-        currentIndex: currentScreenIndex,
-        onTap:(int value){
-          ref.read(screenIndexProvider.notifier).state = value;
-      },
-        // dotIndicatorColor: Colors.black,
-        items: [
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1), // Shadow color
+            spreadRadius: 2, // Spread radius
+            blurRadius: 4, // Blur radius
+            offset: const Offset(0, 3),
+          ),
+        ],
 
-          /// Home
+        currentIndex: currentScreenIndex,
+        onTap: (int value) {
+          ref.read(screenIndexProvider.notifier).state = value;
+        },
+        items: [
           DotNavigationBarItem(
             icon: const Icon(Icons.home),
             selectedColor: Colors.purple,
           ),
-
-          /// Likes
           DotNavigationBarItem(
             icon: const Icon(Icons.bookmark_outline_rounded),
             selectedColor: Colors.pink,
           ),
-
-          /// Search
           DotNavigationBarItem(
             icon: const Icon(Icons.search),
             selectedColor: Colors.orange,
           ),
-
-          /// Profile
           DotNavigationBarItem(
             icon: const Icon(Icons.settings),
             selectedColor: Colors.teal,
           ),
-
         ],
       ),
         body: screens[currentScreenIndex],
