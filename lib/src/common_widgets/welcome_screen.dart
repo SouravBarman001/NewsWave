@@ -64,20 +64,17 @@ class WelcomeScreen extends StatelessWidget {
                            Get.toNamed('/login');
                            print('login');
                          },
-                         child: Hero(
-                           tag: 'signin',
-                           child: Container(
-                             decoration: const BoxDecoration(
-                               color: Color(0xffF89AEE),
-                               borderRadius: BorderRadius.only(
-                                   topLeft: Radius.circular(15),
-                                   bottomLeft: Radius.circular(15)
-                               )
-                             ),
-                             alignment: Alignment.center,
-                             child: Text('Sign in',style: GoogleFonts.outfit(
-                                 fontSize: 19,fontWeight: FontWeight.bold,color: Colors.white),),
+                         child: Container(
+                           decoration: const BoxDecoration(
+                             color: Color(0xffF89AEE),
+                             borderRadius: BorderRadius.only(
+                                 topLeft: Radius.circular(15),
+                                 bottomLeft: Radius.circular(15)
+                             )
                            ),
+                           alignment: Alignment.center,
+                           child: Text('Sign in',style: GoogleFonts.outfit(
+                               fontSize: 19,fontWeight: FontWeight.bold,color: Colors.white),),
                          ),
                        ),
                      ),

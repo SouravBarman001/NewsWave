@@ -1,38 +1,42 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dot_navigation_bar/dot_navigation_bar.dart';
-import 'package:dots_indicator/dots_indicator.dart';
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:newswave/src/features/collections/presentation/collection_screen.dart';
-import 'package:newswave/src/features/search/presentation/search_screen.dart';
-import 'package:newswave/src/features/settings/presentation/settings_screen.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:newswave/src/features/home/presentation/providers/banner_article_provider.dart';
+import 'package:newswave/src/features/home/presentation/providers/body_article_provider.dart';
 
-import '../../../utils/bottom_navigation_provider.dart';
+import '../../../common_widgets/app_drawer_widgets.dart';
+import '../domain/banner_article_model.dart';
+import 'home_screen_banner.dart';
+import 'home_screen_body.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
 
-  //Country List
-  List<String> countryList = [
-    "PAKISTAN",
-    "INDIA",
-    "JAPAN",
-    "AUSTRALIA",
-    "RUSSIA",
-    "BELIZE"
-  ];
 
-  int currentIndex = 0;
+  Future<void> _bannerRefresh() async {
+    try {
+       ref.refresh(bannerArticleProvider);
+    } catch (error) {
+      // Handle error
+    }
+  }
 
-  CarouselController controller = CarouselController();
+  Future<void> _bodyRefresh() async {
+    try {
+       ref.refresh(bodyArticleProvider);
+    } catch (error) {
+      // Handle error
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: const Drawer(
       //  surfaceTintColor:Colors.black,
         elevation: 0,
-        child: Icon(Icons.menu,color: Colors.black,),
+        child: AppDrawerWidget(),
       ),
       appBar: AppBar(
         //iconTheme: const IconThemeData(color: Colors.black),
@@ -78,53 +82,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
         ),
       ),
-      body:  SingleChildScrollView(
-        child: Column(
-          children: [
-            CarouselSlider(
-              carouselController: controller,
-              items: countryList.map((e) {
-                return Card(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  color: Colors.green,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      children: [
-                        Text(e.trim().toString()),
-                        Text(e.trim().toString()),
+      body:  RefreshIndicator(
+        displacement: 10,
+        backgroundColor: Colors.blueAccent,
+        color: Colors.white,
+        strokeWidth: 3,
+        triggerMode: RefreshIndicatorTriggerMode.onEdge,
+        onRefresh: () async {
+          _bannerRefresh();
+          _bodyRefresh();
+          //return await ref.refresh(bannerArticleProvider);
+         // return ref.refresh(bodyArticleProvider)
 
-                      ],
-                    ),
-                  ),
-                );
-              }).toList(),
-              options: CarouselOptions(
-                height: 300,
-                onPageChanged: (val, _) {
-                  // No need to use setState here
-                  setState(() {
-                    currentIndex = val;
-                  });
-                  print("new index $val");
-                  controller.jumpToPage(val);
-                },
-              ),
-            ),
-            const SizedBox(height: 10),
-            DotsIndicator(
-              dotsCount: countryList.length,
-              position: currentIndex,
-              decorator: DotsDecorator(
-                spacing: const EdgeInsets.all(2),
-                activeColor: Colors.blue,
-                size: const Size.square(12.0),
-                activeSize: const Size.square(12.0),
-                activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-              ),
-            ),
+        },
+        child:  ListView(
+          children: const [
+            HomeScreenBanner(),
+            HomeScreenBody(),
           ],
         ),
       ),

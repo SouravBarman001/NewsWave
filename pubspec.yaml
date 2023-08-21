@@ -40,8 +40,13 @@ dependencies:
   google_fonts: ^5.1.0
   path_provider:
   carousel_slider: ^4.2.1
-  smooth_page_indicator:
   dots_indicator: ^3.0.0
+  auto_size_text: ^3.0.0
+  lottie: ^2.6.0
+  http:
+  cached_network_image: ^3.2.3
+  intl: ^0.18.1
+
 
 
 dev_dependencies:
@@ -71,6 +76,8 @@ flutter:
     - images/
     - images/welcome/
     - images/login/
+    - images/drawer/
+    - lottie_animation/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

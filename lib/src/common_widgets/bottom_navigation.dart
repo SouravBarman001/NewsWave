@@ -14,7 +14,7 @@ class BottomNavigation extends ConsumerWidget {
    BottomNavigation({super.key});
 
 
-  List<dynamic> screens = [
+  List<Widget> screens = [
     const HomeScreen(),
     const CollectionScreen(),
     const SearchScreen(),
@@ -60,7 +60,10 @@ class BottomNavigation extends ConsumerWidget {
           ),
         ],
       ),
-        body: screens[currentScreenIndex],
+        body: IndexedStack(
+          index: currentScreenIndex,
+          children: screens,
+        ),
     );
   }
 }

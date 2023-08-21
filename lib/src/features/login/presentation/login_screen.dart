@@ -123,27 +123,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Hero(
-                    tag: 'signin',
-                    child: InkWell(
-                      onTap: (){
-                        Get.to(()=>BottomNavigation());
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 60,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: const Color(0xffF89AEE),
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        child: Text(
-                          'Sign in',
-                          style: GoogleFonts.outfit(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 24,
-                              color: Colors.white),
-                        ),
+                  InkWell(
+                    onTap: (){
+                      Get.to(()=>BottomNavigation());
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 60,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: const Color(0xffF89AEE),
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Text(
+                        'Sign in',
+                        style: GoogleFonts.outfit(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 24,
+                            color: Colors.white),
                       ),
                     ),
                   ),
