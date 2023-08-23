@@ -47,6 +47,7 @@ dependencies:
   cached_network_image: ^3.2.3
   intl: ^0.18.1
   dismissible_page: ^1.0.2
+  smooth_page_indicator: ^1.1.0
 
 
 

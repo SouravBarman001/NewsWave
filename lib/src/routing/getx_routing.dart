@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:newswave/src/common_widgets/splash_screen.dart';
 import 'package:newswave/src/common_widgets/welcome_screen.dart';
 import 'package:newswave/src/features/login/presentation/login_screen.dart';
 
 import '../features/home/presentation/home_screen.dart';
+import '../features/home/presentation/more_news.dart';
 
 /// used to declare all the routes in strings so that
 /// we can navigate through only the page names
@@ -11,7 +13,7 @@ class Routes {
   static String page2 = "/login";
   static String page3 = "/homeScreen";
   static String page4 = "/splash";
-  static String page5 = "/page5";
+  static String page5 = "/moreNews";
   static String page6 = "/page6";
 }
 
@@ -29,6 +31,14 @@ final pages = [
   GetPage(
     name: Routes.page3,
     page: () => const HomeScreen(),transition: Transition.rightToLeft,transitionDuration: const Duration(milliseconds: 700),
+  ),
+  GetPage(
+    name: Routes.page4,
+    page: () => const SplashScreen(),transition: Transition.rightToLeft,transitionDuration: const Duration(milliseconds: 700),
+  ),
+  GetPage(
+    name: Routes.page5,
+    page: () => const MoreNews(),transition: Transition.fadeIn,transitionDuration: const Duration(milliseconds: 700),
   ),
 
 ];

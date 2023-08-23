@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dismissible_page/dismissible_page.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -11,40 +13,25 @@ import 'package:newswave/src/features/home/domain/banner_article_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../common_widgets/banner_details.dart';
 import '../../../common_widgets/news_details.dart';
-import '../../../constants/media_query_data.dart';
-import 'providers/banner_article_provider.dart';
 import 'package:intl/intl.dart';
 
-class HomeScreenBanner extends ConsumerStatefulWidget {
-  const HomeScreenBanner({super.key});
+import '../../home/presentation/providers/banner_article_provider.dart';
+
+class CategoryNews extends ConsumerStatefulWidget {
+  const CategoryNews({super.key});
 
   @override
-  ConsumerState<HomeScreenBanner> createState() => _HomeScreenBannerState();
+  ConsumerState<CategoryNews> createState() => _HomeScreenBannerState();
 }
 
-class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
-//Country List
-//   List<String> countryList = [
-//     "PAKISTAN",
-//     "INDIA",
-//     "JAPAN",
-//     "AUSTRALIA",
-//     "RUSSIA",
-//     "BELIZE"
-//   ];
+class _HomeScreenBannerState extends ConsumerState<CategoryNews> {
 
   int currentIndex = 0;
-// String apiText = "Jio Financial Services, Reliance's $20 billion spin-off, makes market debut | TechCrunch";
-// String get escapedText => apiText.replaceAll(r"$", r"\$");
-
   CarouselController controller = CarouselController();
 
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
     final apiData = ref.watch(bannerArticleProvider);
     return apiData.when(
       data: (apiData) {
@@ -60,20 +47,20 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
                 final bdTimezone = dateTime.toLocal();
                 // Format the time in the desired format
                 String formattedTime =
-                    DateFormat("HH:mm", 'en_US').format(bdTimezone);
+                DateFormat("HH:mm", 'en_US').format(bdTimezone);
 
                 //  print(formattedTime);
 
                 return GestureDetector(
 
 
-                onTap: (){
+                  onTap: (){
                     // context.pushTransparentRoute(
                     //     BannerDetails(articleList: e,index:currentIndex,)
                     // );
-                Get.to(() => BannerDetails(articleList: e,index: currentIndex,));
+                    Get.to(() => BannerDetails(articleList: e,index: currentIndex,));
 
-                },
+                  },
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -87,12 +74,12 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
                           borderRadius: BorderRadius.circular(20),
                           child: CachedNetworkImage(
                             imageUrl:
-                                e.urlToImage, // Use the URL from your Article data
+                            e.urlToImage, // Use the URL from your Article data
                             fit: BoxFit.cover,
                             placeholder: (context, url) =>
-                                const Center(child: CircularProgressIndicator()),
+                            const Center(child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
-                                const Center(child: Icon(Icons.error)),
+                            const Center(child: Icon(Icons.error)),
                           ),
                         ),
                         // Slide Content
@@ -136,7 +123,7 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
                             ),
                           ),
                         ),
-                       // const SizedBox(height: 10),
+                        // const SizedBox(height: 10),
 
                       ],
                     ),
@@ -144,24 +131,23 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
                 );
               }).toList(),
               options: CarouselOptions(
-                viewportFraction: 1.0,  // it takes the full width
-                  height : 300,
                 scrollPhysics: const FixedExtentScrollPhysics(),
-               // autoPlayAnimationDuration : const Duration(seconds: 2),
-                 autoPlay: true,
-                  autoPlayCurve : Curves.decelerate,
-                 autoPlayInterval:const Duration(seconds: 3),
+                // autoPlayAnimationDuration : const Duration(seconds: 2),
+                autoPlay: true,
+                autoPlayCurve : Curves.decelerate,
+                autoPlayInterval:const Duration(seconds: 3),
+                height: 300,
                 onPageChanged: (val, _) {
                   // No need to use setState here
                   setState(() {
                     currentIndex = val;
                   });
                   print("new index $val");
-               //   controller.jumpToPage(val);
+                  //   controller.jumpToPage(val);
 
                   controller.animateToPage(val,
                       duration: const Duration(milliseconds: 600),
-                  curve: Curves.decelerate);
+                      curve: Curves.decelerate);
 
                 },
               ),
@@ -185,7 +171,7 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
       },
       error: (error, s) => const Column(
         mainAxisAlignment: MainAxisAlignment.center,
-       // crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: 100,),
           Row(

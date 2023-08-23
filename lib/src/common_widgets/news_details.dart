@@ -43,12 +43,12 @@ class _NewsDetailsState extends ConsumerState<NewsDetails> {
     return DismissiblePage(
       onDismissed: () => Navigator.of(context).pop(),
       // Start of the optional properties
-      //isFullScreen: false,
+      isFullScreen: true,
       disabled: false,
       minRadius: 10,
       maxRadius: 10,
       dragSensitivity: 1.0,
-      maxTransformValue: .8,
+      maxTransformValue: 1,
       direction: DismissiblePageDismissDirection.down,
       backgroundColor: Colors.black,
       onDragStart: () {

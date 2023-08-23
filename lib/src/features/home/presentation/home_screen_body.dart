@@ -37,7 +37,11 @@ class _HomeScreenBodyState extends ConsumerState<HomeScreenBody> {
                 fontSize: 16,
                 color: Colors.black87,
               ),),
-              const Icon(Icons.read_more_sharp),
+              InkWell(
+                onTap: (){
+                  Get.toNamed('moreNews');
+                },
+                  child: const Icon(Icons.read_more_sharp)),
             ],
           ),
           const SizedBox(height: 18,),
@@ -47,7 +51,7 @@ class _HomeScreenBodyState extends ConsumerState<HomeScreenBody> {
               return ListView.builder(
                   shrinkWrap: true,
                   physics: const ScrollPhysics(),
-                  itemCount: articleList.length,
+                  itemCount: articleList.length > 10 ? 5 : articleList.length,
                   itemBuilder: (BuildContext context,index){
                     return Container(
                       margin: const EdgeInsets.only(bottom: 18),
