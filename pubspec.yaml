@@ -46,6 +46,7 @@ dependencies:
   http:
   cached_network_image: ^3.2.3
   intl: ^0.18.1
+  dismissible_page: ^1.0.2
 
 
 
@@ -76,8 +77,10 @@ flutter:
     - images/
     - images/welcome/
     - images/login/
+    - images/newsdetails/
     - images/drawer/
     - lottie_animation/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

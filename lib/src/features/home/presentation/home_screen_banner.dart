@@ -1,11 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dismissible_page/dismissible_page.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:newswave/src/features/home/application/banner_services/home_api.dart';
 import 'package:newswave/src/features/home/domain/banner_article_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../common_widgets/banner_details.dart';
+import '../../../common_widgets/news_details.dart';
 import 'providers/banner_article_provider.dart';
 import 'package:intl/intl.dart';
 
@@ -43,6 +48,7 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
         return Column(
           children: [
             CarouselSlider(
+
               carouselController: controller,
               items: articleList.map((e) {
                 DateTime dateTime = DateTime.parse(e.publishedAt);
@@ -54,71 +60,82 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
 
                 //  print(formattedTime);
 
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  color: Colors.green,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      // Background Image with rounded corners
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              e.urlToImage, // Use the URL from your Article data
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              const Center(child: Icon(Icons.error)),
-                        ),
-                      ),
-                      // Slide Content
-                      Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    flex: 6,
-                                    // Wrap this text widget with Expanded
-                                    child: Text(
-                                      e.title, // Use the title from your Article data
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Text(
-                                      formattedTime
-                                          .toString(), // Replace with actual time data
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              // Rest of your slide content
-                              // ...
-                            ],
+                return GestureDetector(
+
+
+                onTap: (){
+                    // context.pushTransparentRoute(
+                    //     BannerDetails(articleList: e,index:currentIndex,)
+                    // );
+                Get.to(() => BannerDetails(articleList: e,index: currentIndex,));
+
+                },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    color: Colors.green,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        // Background Image with rounded corners
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                e.urlToImage, // Use the URL from your Article data
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) =>
+                                const Center(child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) =>
+                                const Center(child: Icon(Icons.error)),
                           ),
                         ),
-                      ),
-                     // const SizedBox(height: 10),
+                        // Slide Content
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      flex: 6,
+                                      // Wrap this text widget with Expanded
+                                      child: Text(
+                                        e.title, // Use the title from your Article data
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        formattedTime
+                                            .toString(), // Replace with actual time data
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                // Rest of your slide content
+                                // ...
+                              ],
+                            ),
+                          ),
+                        ),
+                       // const SizedBox(height: 10),
 
-                    ],
+                      ],
+                    ),
                   ),
                 );
               }).toList(),

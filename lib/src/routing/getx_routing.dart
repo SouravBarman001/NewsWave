@@ -10,7 +10,7 @@ class Routes {
   static String page1 = "/welcome";
   static String page2 = "/login";
   static String page3 = "/homeScreen";
-  static String page4 = "/page4";
+  static String page4 = "/splash";
   static String page5 = "/page5";
   static String page6 = "/page6";
 }
@@ -24,11 +24,11 @@ final pages = [
   ),
   GetPage(
     name: Routes.page2,
-    page: () => const LoginScreen(),
+    page: () => const LoginScreen(),transition: Transition.upToDown,transitionDuration: const Duration(milliseconds: 700),
   ),
   GetPage(
     name: Routes.page3,
-    page: () => const HomeScreen(),
+    page: () => const HomeScreen(),transition: Transition.rightToLeft,transitionDuration: const Duration(milliseconds: 700),
   ),
 
 ];

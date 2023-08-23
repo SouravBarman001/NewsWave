@@ -25,7 +25,7 @@ class Article {
         id: json['source']['id'] ?? '',
         name: json['source']['name'] ?? '',
       ),
-      author: json['author'] ?? '',
+      author: json['author'] ?? 'Unknown',
       title: json['title'] ?? '',
       description: json['description'] ?? '',
       url: json['url'] ?? '',

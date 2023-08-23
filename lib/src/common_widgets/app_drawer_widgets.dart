@@ -20,7 +20,7 @@ class _AppDrawerWidgetState extends State<AppDrawerWidget> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset('images/drawer/gradient.jpg', fit: BoxFit.cover),
+                Image.asset('images/drawer/gradient-2.jpg', fit: BoxFit.cover),
                 Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +39,7 @@ class _AppDrawerWidgetState extends State<AppDrawerWidget> {
                                 height: 130,
                                 fit: BoxFit.fill,
                               ),
-                              const SizedBox(height: 25), // Adding spacing between animation and text
+                              const SizedBox(height: 30), // Adding spacing between animation and text
                             ],
                           ),
                           Positioned(
@@ -57,10 +57,10 @@ class _AppDrawerWidgetState extends State<AppDrawerWidget> {
                                 ),
                                 Text(
                                   'sourav.iit.nstu@gmail.com',
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: Colors.white,
+                                  style: GoogleFonts.alata(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black,
                                   ),
                                 ),
                               ],
