@@ -48,6 +48,8 @@ dependencies:
   intl: ^0.18.1
   dismissible_page: ^1.0.2
   smooth_page_indicator: ^1.1.0
+  shimmer: ^3.0.0
+  another_carousel_pro: ^1.0.0
 
 
 

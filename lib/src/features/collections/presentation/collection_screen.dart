@@ -8,6 +8,10 @@ import '../../home/presentation/home_screen_banner.dart';
 import '../../home/presentation/providers/banner_article_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'bottom_sheet_test.dart';
+import 'category_news.dart';
+import 'only_carousel.dart';
+
 class CollectionScreen extends ConsumerStatefulWidget {
   const CollectionScreen({super.key});
 
@@ -25,7 +29,7 @@ class _CollectionScreenState extends ConsumerState<CollectionScreen> {
     final apiData = ref.watch(bannerArticleProvider);
 
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: const Color(0xfffafafa),
       drawer: const Drawer(
         //  surfaceTintColor:Colors.black,
         elevation: 0,
@@ -79,7 +83,10 @@ class _CollectionScreenState extends ConsumerState<CollectionScreen> {
         },
         child:  ListView(
           children: const [
-            HomeScreenBanner(),
+            CategoryNews(),
+           // HomeScreenBanner(),
+           // BottomSheetContent(),
+          //  OnlyCarousel()
           ],
         ),
       ),

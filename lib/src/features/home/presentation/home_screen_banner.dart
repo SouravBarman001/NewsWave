@@ -11,9 +11,11 @@ import 'package:newswave/src/features/home/domain/banner_article_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../common_widgets/banner_details.dart';
 import '../../../common_widgets/news_details.dart';
+import '../../../common_widgets/shimmer_effect.dart';
 import '../../../constants/media_query_data.dart';
 import 'providers/banner_article_provider.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreenBanner extends ConsumerStatefulWidget {
   const HomeScreenBanner({super.key});
@@ -39,7 +41,6 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
 
   CarouselController controller = CarouselController();
 
-
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -52,7 +53,6 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
         return Column(
           children: [
             CarouselSlider(
-
               carouselController: controller,
               items: articleList.map((e) {
                 DateTime dateTime = DateTime.parse(e.publishedAt);
@@ -65,20 +65,20 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
                 //  print(formattedTime);
 
                 return GestureDetector(
-
-
-                onTap: (){
+                  onTap: () {
                     // context.pushTransparentRoute(
                     //     BannerDetails(articleList: e,index:currentIndex,)
                     // );
-                Get.to(() => BannerDetails(articleList: e,index: currentIndex,));
-
-                },
+                    Get.to(() => BannerDetails(
+                          articleList: e,
+                          index: currentIndex,
+                        ));
+                  },
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    color: Colors.green,
+                    //color: Colors.green,
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
@@ -86,11 +86,10 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: CachedNetworkImage(
-                            imageUrl:
-                                e.urlToImage, // Use the URL from your Article data
+                            imageUrl: e
+                                .urlToImage, // Use the URL from your Article data
                             fit: BoxFit.cover,
-                            placeholder: (context, url) =>
-                                const Center(child: CircularProgressIndicator()),
+                            placeholder: (context, url) => const SmallShimmerEffect(),
                             errorWidget: (context, url, error) =>
                                 const Center(child: Icon(Icons.error)),
                           ),
@@ -104,7 +103,8 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       flex: 6,
@@ -136,37 +136,37 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
                             ),
                           ),
                         ),
-                       // const SizedBox(height: 10),
-
+                        // const SizedBox(height: 10),
                       ],
                     ),
                   ),
                 );
               }).toList(),
               options: CarouselOptions(
-                viewportFraction: 1.0,  // it takes the full width
-                  height : 300,
-                scrollPhysics: const FixedExtentScrollPhysics(),
-               // autoPlayAnimationDuration : const Duration(seconds: 2),
-                 autoPlay: true,
-                  autoPlayCurve : Curves.decelerate,
-                 autoPlayInterval:const Duration(seconds: 3),
+                viewportFraction: 1.0, // it takes the full width
+                height: 300,
+               // scrollPhysics: const FixedExtentScrollPhysics(),
+                // autoPlayAnimationDuration : const Duration(seconds: 2),
+                autoPlay: true,
+                autoPlayCurve: Curves.decelerate,
+                autoPlayInterval: const Duration(seconds: 3),
                 onPageChanged: (val, _) {
                   // No need to use setState here
                   setState(() {
                     currentIndex = val;
                   });
                   print("new index $val");
-               //   controller.jumpToPage(val);
+                  //   controller.jumpToPage(val);
 
                   controller.animateToPage(val,
                       duration: const Duration(milliseconds: 600),
-                  curve: Curves.decelerate);
-
+                      curve: Curves.decelerate);
                 },
               ),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             DotsIndicator(
               dotsCount: articleList.length,
               position: currentIndex,
@@ -185,13 +185,14 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
       },
       error: (error, s) => const Column(
         mainAxisAlignment: MainAxisAlignment.center,
-       // crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 100,),
+          SizedBox(
+            height: 100,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               Icon(Icons.error_outline),
             ],
           ),
@@ -201,16 +202,11 @@ class _HomeScreenBannerState extends ConsumerState<HomeScreenBanner> {
         mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 100,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              CircularProgressIndicator(),
-            ],
-          ),
+          ShimmerEffect(),
         ],
       ),
     );
   }
 }
+
+

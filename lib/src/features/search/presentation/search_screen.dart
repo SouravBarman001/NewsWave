@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:shimmer/shimmer.dart';
 import '../../../common_widgets/app_drawer_widgets.dart';
+import '../../../common_widgets/shimmer_effect.dart';
 
 
 class SearchScreen extends StatefulWidget {
@@ -54,6 +55,20 @@ class _SearchScreenState extends State<SearchScreen> {
 
 
         ),
+      ),
+      body:  Column(
+       // mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+         Expanded(
+           child: ListView.builder(
+                 itemCount: 7,
+               itemBuilder: (BuildContext context,index){
+                   return  const BodyShimmerEffect();
+               }),
+         )
+
+        ],
       ),
     );
   }

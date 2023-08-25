@@ -7,6 +7,7 @@ import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:newswave/src/common_widgets/shimmer_effect.dart';
 import 'package:newswave/src/features/home/presentation/providers/banner_article_provider.dart';
 import 'package:newswave/src/features/home/presentation/providers/body_article_provider.dart';
 
@@ -158,7 +159,7 @@ class _HomeScreenState extends ConsumerState<MoreNews> {
                                           imageUrl: articleList[index].urlToImage.toString(), // Use the URL from your Article data
                                           fit: BoxFit.cover,
                                           placeholder: (context, url) =>
-                                          const Center(child: CircularProgressIndicator()),
+                                          const SmallShimmerEffect(),
                                           errorWidget: (context, url, error) =>
                                           const Center(child: Icon(Icons.error)),
                                         ),
@@ -206,14 +207,21 @@ class _HomeScreenState extends ConsumerState<MoreNews> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 100,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                  BodyShimmerEffect(),
+                  SizedBox(height: 5,),
+                  BodyShimmerEffect(),
+                  SizedBox(height: 5,),
 
-                      CircularProgressIndicator(),
-                    ],
-                  ),
+                  BodyShimmerEffect(),
+                  SizedBox(height: 5,),
+
+                  BodyShimmerEffect(),
+                  SizedBox(height: 5,),
+
+                  BodyShimmerEffect(),
+                  SizedBox(height: 5,),
+
+                  BodyShimmerEffect(),
                 ],
               ),),
             // const SizedBox(height: 10,),
